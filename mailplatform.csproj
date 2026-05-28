@@ -1,0 +1,36 @@
+<Project Sdk="Microsoft.NET.Sdk">
+
+  <PropertyGroup>
+    <OutputType>Exe</OutputType>
+    <TargetFramework>net10.0</TargetFramework>
+    <ImplicitUsings>enable</ImplicitUsings>
+    <Nullable>enable</Nullable>
+  </PropertyGroup>
+
+  <ItemGroup>
+    <!-- Core library updates for .NET 10 compatibility -->
+    <PackageReference Include="MailKit" Version="4.16.0" />
+    
+    <!-- Microsoft.Extensions updated to 10.x.x for .NET 10 alignment -->
+    <PackageReference Include="Microsoft.Extensions.Configuration" Version="10.0.7" />
+    <PackageReference Include="Microsoft.Extensions.Configuration.Binder" Version="10.0.7" />
+    <PackageReference Include="Microsoft.Extensions.Configuration.Json" Version="10.0.7" />
+    
+    <!-- Database provider update -->
+    <PackageReference Include="MySql.Data" Version="9.2.0" />
+  </ItemGroup>
+
+  <ItemGroup>
+    <Content Include="appsettings.json">
+      <CopyToOutputDirectory>Always</CopyToOutputDirectory>
+    </Content>
+  </ItemGroup>
+
+  <ItemGroup>
+    <None Update="article_removal_notice.html" CopyToOutputDirectory="PreserveNewest" />
+    <None Update="email_register_template.html" CopyToOutputDirectory="PreserveNewest" />
+    <None Update="email_transfer_request.html" CopyToOutputDirectory="PreserveNewest" />
+    <None Update="email_transfer_request_item.html" CopyToOutputDirectory="PreserveNewest" />
+    <None Update="email_account_termination_notice.html" CopyToOutputDirectory="PreserveNewest" />
+  </ItemGroup>
+</Project>

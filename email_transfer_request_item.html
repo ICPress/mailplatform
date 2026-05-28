@@ -1,0 +1,22 @@
+<!-- Transfer Item: rendered once per item, injected into {{itemsTransfered}} -->
+<table width="100%" cellpadding="0" cellspacing="0" border="0"
+  style="background-color:#F5F7FA; border-radius:6px; border-left:3px solid #3E92CC;
+         margin-bottom:10px;">
+  <tr>
+    <td style="padding:14px 18px;">
+      <p style="margin:0 0 6px; font-size:14px; font-weight:700; color:#0A2463;">
+        {{rewardName}}
+      </p>
+      <p style="margin:0 0 4px; font-size:13px; color:#5A6570;">
+        Amount: <span style="color:#1E1E24; font-weight:600;">{{displayAmount}}</span>
+      </p>
+      <p style="margin:0; font-size:13px; color:#5A6570;">
+        Transaction:&nbsp;
+        <a href="https://solscan.io/tx/{{transaction}}" target="_blank"
+          style="color:#3E92CC; text-decoration:none; font-weight:600;">
+          {{displayTransaction}}
+        </a>
+      </p>
+    </td>
+  </tr>
+</table>
