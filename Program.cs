@@ -1,4 +1,4 @@
-﻿// See https://aka.ms/new-console-template for more information
+// See https://aka.ms/new-console-template for more information
 using System.Text;
 using System.Text.Json;
 using MySql.Data.MySqlClient;
@@ -27,13 +27,14 @@ try
 {
     while (true)
     {
+        queueList.Clear();
         using (MySqlConnection connection = new(serverSettings.MysqlConnectionStoryPop))
         {
             try
             {
                 await connection.OpenAsync();
                 var mySqlCommand = new MySql.Data.MySqlClient.MySqlCommand();
-                mySqlCommand.CommandText = "SELECT queue_id, email , type ,  additional_data , claimed  from mail_queue order by queue_id limit 50";
+                mySqlCommand.CommandText = "SELECT queue_id, email , type ,  additional_data , claimed  from mail_queue WHERE claimed = 0 order by queue_id limit 50";
                 mySqlCommand.Connection = connection;
                 using (var reader = mySqlCommand.ExecuteReader())
                 {
@@ -72,7 +73,9 @@ try
                                 {
                                     Console.WriteLine("ERROR: missing additional data for register token, email:" + eventRow.email);
                                 }
-                                else await MailUtil.SendEmailAccessToken(eventRow.email, eventRow.additional_data, serverSettings);
+                                else if (await MailUtil.IsActiveEmailTokenAsync(connection, eventRow.email, eventRow.additional_data))
+                                    await MailUtil.SendEmailAccessToken(eventRow.email, eventRow.additional_data, serverSettings);
+                                else Console.WriteLine("Skipped expired, used or unmatched email token for queue {0}.", eventRow.queue_id);
                             }
                             else if (eventRow.type == EmailType.INVITE)
                             {

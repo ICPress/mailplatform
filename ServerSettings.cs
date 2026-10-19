@@ -1,12 +1,12 @@
 
 public class ServerSettings
 {
+    public string VerificationPageUrl { get; set; } = "https://icpress.org/Account/email-verification";
     public string MysqlConnectionGorse { get; set; } = "";
     public string MysqlConnectionStoryPop { get; set; } = "";
 
     public string JWTSecret { get; set; } = "";
 
-    public string IgniteEndpoint { get; set; } = "";
     public string SpacyEndpoint { get; set; } = "";
 
     public string GorseAPIEndpoint { get; set; } = "";
